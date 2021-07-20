@@ -5,7 +5,7 @@ services:
     image: onedata/oneprovider:20.02.10
     # Hostname (in this case the hostname inside Docker network)
     #hostname: node1.oneprovider.localhost
-    hostname: hsm1.cerit-sc.cz
+    hostname: example.domain.eu
     # dns: 8.8.8.8 # Optional, in case Docker containers have no DNS access
     # Host network mode is preferred, but on some systems may not work (e.g. CentOS)
     # To use bridge network
@@ -31,4 +31,3 @@ services:
     #  - "443:443"
     #  - "6665:6665"
     #  - "9443:9443"
-    
