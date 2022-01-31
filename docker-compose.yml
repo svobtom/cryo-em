@@ -1,17 +1,22 @@
 version: '2.0'
 services:
-  node1.oneprovider.localhost:
+  oneprovider:
     # Oneprovider Docker image version
-    image: onedata/oneprovider:20.02.10
+    image: onedata/oneprovider:20.02.15
     # Hostname (in this case the hostname inside Docker network)
-    #hostname: node1.oneprovider.localhost
     hostname: example.domain.eu
-    # dns: 8.8.8.8 # Optional, in case Docker containers have no DNS access
+    # Optional, in case Docker containers have no DNS access
+    # dns: 8.8.8.8 
     # Host network mode is preferred, but on some systems may not work (e.g. CentOS)
-    # To use bridge network
+    # then use bridge and uncomment ports section
     network_mode: host
-    # Friendly name of the Oneprovider Docker container
-    container_name: oneprovider-1
+    # Expose the necessary ports from Oneprovider container to the host
+    # Ports section can be commented when using "network_mode: host"
+    #ports:
+    #  - "80:80"
+    #  - "443:443"
+    #  - "6665:6665"
+    #  - "9443:9443"
     # Restart policy
     restart: unless-stopped
 
@@ -21,13 +26,6 @@ services:
        # Oneprovider runtime files
        - "/opt/onedata/oneprovider/persistence:/volumes/persistence"
        # Data storage directories
-       - "/opt/onedata/storage:/volumes/storage"
+       - "/var/onedata/storage:/volumes/storage"
        # Additional, trusted CA certificates (all files from this directory will be added)
        - "/opt/onedata/oneprovider/cacerts:/etc/op_worker/cacerts"
-    # Expose the necessary ports from Oneprovider container to the host
-    # Ports section can be commented when using "network_mode: host"
-    #ports:
-    #  - "80:80"
-    #  - "443:443"
-    #  - "6665:6665"
-    #  - "9443:9443"
